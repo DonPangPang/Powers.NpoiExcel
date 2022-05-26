@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32516.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{82DC19F8-5C0C-45F7-B547-25143BC83CC5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{E68907FE-59CF-4299-8EBE-DC7BE7DB4EE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Powers.NpioExcel", "src\Powers.NpioExcel\Powers.NpioExcel.csproj", "{C57F5233-2539-420F-8589-DA6868F7A9F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Powers.NpioExcel.TestProject", "test\Powers.NpioExcel.TestProject\Powers.NpioExcel.TestProject.csproj", "{62F4FFA9-EF88-409C-9234-FC65EA00C40F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "解决方案项", "解决方案项", "{D96DABC3-7E5F-496D-9CA2-C4CEAD97E833}"
+	ProjectSection(SolutionItems) = preProject
+		README.MD = README.MD
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C57F5233-2539-420F-8589-DA6868F7A9F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C57F5233-2539-420F-8589-DA6868F7A9F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C57F5233-2539-420F-8589-DA6868F7A9F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C57F5233-2539-420F-8589-DA6868F7A9F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62F4FFA9-EF88-409C-9234-FC65EA00C40F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62F4FFA9-EF88-409C-9234-FC65EA00C40F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62F4FFA9-EF88-409C-9234-FC65EA00C40F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62F4FFA9-EF88-409C-9234-FC65EA00C40F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C57F5233-2539-420F-8589-DA6868F7A9F9} = {82DC19F8-5C0C-45F7-B547-25143BC83CC5}
+		{62F4FFA9-EF88-409C-9234-FC65EA00C40F} = {E68907FE-59CF-4299-8EBE-DC7BE7DB4EE2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8A87FE0F-A321-4C3F-8907-65431928B431}
+	EndGlobalSection
+EndGlobal
