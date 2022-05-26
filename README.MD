@@ -21,7 +21,7 @@ public class User : IExcelStruct
 }
 ```
 
-2: Use
+2: How to use
 
 ```csharp
 var path = Environment.CurrentDirectory + "/files/test.xlsx";
