@@ -1,6 +1,6 @@
 ﻿# Powers.NpoiExcel
 
-Now Support: Import Excel to Entity
+Now Support: Import/Export Excel to Entity
 
 1: Create your entity
 
@@ -24,8 +24,11 @@ public class User : IExcelStruct
 2: How to use
 
 ```csharp
-var path = Environment.CurrentDirectory + "/files/test.xlsx";
+var root = Environment.CurrentDirectory + "/files";
 
+var path = root + "/test.xlsx";
+
+// Import
 var data = new ExcelImport(path).ToList<User>();
 
 _testOutputHelper.WriteLine("姓名\t年龄\t性别\t生日");
@@ -34,6 +37,10 @@ foreach (var item in data)
 {
     _testOutputHelper.WriteLine($"{item.Name}\t{item.Age}\t{item.Gender}\t{item.Born}");
 }
+
+var out_path = root + "/out.xlsx";
+// Export
+new ExcelExport<User>().Export(data).ToFile(out_path);
 ```
 
 3: Result or run xUnit.Test

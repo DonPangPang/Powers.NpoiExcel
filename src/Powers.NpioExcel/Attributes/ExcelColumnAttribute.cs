@@ -9,5 +9,7 @@ namespace Powers.NpioExcel.Attributes
         public string Name { get; set; } = null!;
 
         public int Index { get; set; } = 0;
+
+        public int Width { get; set; } = 10;
     }
 }

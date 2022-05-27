@@ -10,35 +10,38 @@ using Powers.NpioExcel.Attributes;
 using Powers.NpioExcel.Interfaces;
 
 #nullable disable
-
-namespace Powers.NpioExcel.Import
+namespace Powers.NpioExcel
 {
     public class ExcelImport
     {
         public string FilePath { get; set; }
         public string SheetName { get; set; }
 
+        public List<int> Errors { get; set; }
+
         private DataTable _dataTable;
 
         /// <summary>
         /// 初始化文件路径和Sheet名称
         /// </summary>
-        /// <param name="filePath">  </param>
-        /// <param name="sheetName"> </param>
+        /// <param name="filePath"></param>
+        /// <param name="sheetName"></param>
         public ExcelImport(string filePath, string sheetName = "Sheet1")
         {
             FilePath = filePath;
             SheetName = sheetName;
+
+            Errors = new List<int>();
         }
 
         /// <summary>
         /// 转为指定类型
         /// </summary>
-        /// <typeparam name="T"> </typeparam>
-        /// <returns> </returns>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         public List<T> ToList<T>() where T : IExcelStruct
         {
-            if (_dataTable is null) ToDataTable();
+            if (_dataTable is null) this.ToDataTable();
 
             var list = new List<T>();
             var type = typeof(T);
@@ -64,8 +67,17 @@ namespace Powers.NpioExcel.Import
         /// <summary>
         /// Excel转为DataTable
         /// </summary>
-        /// <returns> </returns>
-        private ExcelImport ToDataTable()
+        /// <returns></returns>
+        public DataTable ToDateTable()
+        {
+            return ToDateTable();
+        }
+
+        /// <summary>
+        /// Excel转为DataTable
+        /// </summary>
+        /// <returns></returns>
+        public ExcelImport ToDataTable()
         {
             _dataTable = new DataTable();
             using (var fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
@@ -86,19 +98,33 @@ namespace Powers.NpioExcel.Import
                 }
 
                 var rowCount = sheet.LastRowNum;
-                for (var i = sheet.FirstRowNum + 1; i <= sheet.LastRowNum; i++)
+                for (var i = (sheet.FirstRowNum + 1); i <= sheet.LastRowNum; i++)
                 {
-                    var row = sheet.GetRow(i);
-                    var dataRow = _dataTable.NewRow();
-                    for (var j = row.FirstCellNum; j < headerRowCount; j++)
-                    {
-                        if (row.GetCell(j) != null)
-                        {
-                            dataRow[j] = row.GetCell(j).ToString();
-                        }
-                    }
+                    var isSave = true;
 
-                    _dataTable.Rows.Add(dataRow);
+                    try
+                    {
+                        var row = sheet.GetRow(i);
+                        var dataRow = _dataTable.NewRow();
+                        for (var j = row.FirstCellNum; j < headerRowCount; j++)
+                        {
+                            if (row.GetCell(j) != null && row.GetCell(j).CellType != CellType.Blank)
+                            {
+                                dataRow[j] = row.GetCell(j).ToString();
+                            }
+                            else
+                            {
+                                isSave = false;
+                                Errors.Add(i + 1);
+                                break;
+                            }
+                        }
+                        if (isSave) _dataTable.Rows.Add(dataRow);
+                    }
+                    catch
+                    {
+                        Errors.Add(i + 1);
+                    }
                 }
             }
 
